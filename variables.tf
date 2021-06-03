@@ -1,18 +1,7 @@
-#########################################################################################
-# IBM Cloud Hyper Protect Crypto Services Provisioning, Initialization and Managing Keys
-# Copyright 2020 IBM
-#########################################################################################
-
-variable "initialize" {
-  type        = bool
-  description = "Flag indicating that if user want to initialize the hpcs instance. If 'true' then the instance is expected to initialize."
-  default     = false
-}
-
-# Path to which CLOUDTKEFILES has to be exported
-variable "tke_files_path" {
+variable "region" {
+  default     = "us-south"
   type        = string
-  description = "Path to which tke files has to be exported"
+  description = "Location of HPCS Instance"
 }
 
 variable "hpcs_instance_guid" {
@@ -20,40 +9,25 @@ variable "hpcs_instance_guid" {
   description = "HPCS Instance GUID"
 }
 
-variable "admin1_name" {
+variable "resource_group_name" {
   type        = string
-  description = "First admin name"
+  description = "Resource group name"
+  default     = "slz-rg"
 }
 
-variable "admin1_password" {
+variable "allowed_network_type" {
+  description = "The network access policy to apply to your Hyper Protect Crypto Services instance. Acceptable values are public-and-private or private-only.After the network access policy is set to private-only, you cannot access your instance from the public network and cannot view or manage keys through the UI. However, you can still adjust the network setting later using the API or CLI"
+  default     = "public-and-private"
   type        = string
-  description = "First admin password"
 }
 
-variable "admin2_name" {
-  type        = string
-  description = "Second admin name"
-}
-
-variable "admin2_password" {
-  type        = string
-  description = "second admin password"
-}
-
-variable "admin_num" {
+variable "hpcs_port" {
+  description = "HPCS service port"
   type        = number
-  description = "Number of admins to manage HPCS"
-  default     = 2
 }
 
-variable "threshold_value" {
-  type        = number
-  description = "Threshold value"
-  default     = 2
-}
-
-variable "rev_threshold_value" {
-  type        = number
-  description = "Remove / delete threshold value"
-  default     = 2
+variable "dual_auth_delete" {
+  description = "Dual auth deletion policy enabled or not"
+  default     = true
+  type        = bool
 }
